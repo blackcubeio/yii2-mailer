@@ -2,35 +2,35 @@
 /**
  * MailerTest.php
  *
- * PHP version 5.6+
+ * PHP Version 8.2+
  *
- * @author Philippe Gaultier <pgaultier@sweelix.net>
- * @copyright 2010-2017 Philippe Gaultier
- * @license http://www.sweelix.net/license license
+ * @author Philippe Gaultier <pgaultier@gmail.com>
+ * @copyright 2010-2024
+ * @license https://www.blackcube.io/license license
  * @version XXX
- * @link http://www.sweelix.net
+ * @link https://www.blackcube.io
  * @package tests\unit
  */
 
 namespace tests\unit;
 
-use sweelix\mailjet\Mailer;
+use blackcube\mailjet\Mailer;
 
 /**
  * Test node basic functions
  *
- * @author Philippe Gaultier <pgaultier@sweelix.net>
- * @copyright 2010-2017 Philippe Gaultier
- * @license http://www.sweelix.net/license license
+ * @author Philippe Gaultier <pgaultier@gmail.com>
+ * @copyright 2010-2024
+ * @license https://www.blackcube.io/license license
  * @version XXX
- * @link http://www.sweelix.net
+ * @link https://www.blackcube.io
  * @package tests\unit
  * @since XXX
  */
 class MailerTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp() :void
     {
         $this->mockApplication([
             'components' => [

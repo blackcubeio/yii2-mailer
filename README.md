@@ -1,19 +1,18 @@
 Mailjet Yii2 integration
 =========================
+[![Release](https://code.redcat.io/blackcube/yii2-mailjet/badges/-/release.svg)](https://code.redcat.io/blackcube/yii2-mailjet/-/releases)
+[![Pipeline](https://code.redcat.io/blackcube/yii2-mailjet/badges/devel/pipeline.svg)](https://code.redcat.io/blackcube/yii2-mailjet/-/pipelines)
+
+[![État de la Barrière Qualité](https://sonarqube.redcat.io/api/project_badges/measure?project=Mailjet&metric=alert_status&token=sqb_d6f644043dc6c1fbfd4006a57d466c22852ab8c0)](https://sonarqube.redcat.io/dashboard?id=Mailjet)
+[![Couverture (TU)](https://sonarqube.redcat.io/api/project_badges/measure?project=Mailjet&metric=coverage&token=sqb_d6f644043dc6c1fbfd4006a57d466c22852ab8c0)](https://sonarqube.redcat.io/dashboard?id=Mailjet)
+[![Maintenabilité](https://sonarqube.redcat.io/api/project_badges/measure?project=Mailjet&metric=sqale_rating&token=sqb_d6f644043dc6c1fbfd4006a57d466c22852ab8c0)](https://sonarqube.redcat.io/dashboard?id=Mailjet)
+[![Fiabilité](https://sonarqube.redcat.io/api/project_badges/measure?project=Mailjet&metric=reliability_rating&token=sqb_d6f644043dc6c1fbfd4006a57d466c22852ab8c0)](https://sonarqube.redcat.io/dashboard?id=Mailjet)
+[![Sécurité](https://sonarqube.redcat.io/api/project_badges/measure?project=Mailjet&metric=security_rating&token=sqb_d6f644043dc6c1fbfd4006a57d466c22852ab8c0)](https://sonarqube.redcat.io/dashboard?id=Mailjet)
+[![Dette Technique](https://sonarqube.redcat.io/api/project_badges/measure?project=Mailjet&metric=sqale_index&token=sqb_d6f644043dc6c1fbfd4006a57d466c22852ab8c0)](https://sonarqube.redcat.io/dashboard?id=Mailjet)
+
 
 This extension allow the developper to use [Mailjet](https://www.mailjet.com/) as an email transport.
 
-
-[![Latest Stable Version](https://poser.pugx.org/sweelix/yii2-mailjet/v/stable)](https://packagist.org/packages/sweelix/yii2-mailjet)
-[![Build Status](https://api.travis-ci.org/pgaultier/yii2-mailjet.svg?branch=master)](https://travis-ci.org/pgaultier/yii2-mailjet)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pgaultier/yii2-mailjet/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pgaultier/yii2-mailjet/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/pgaultier/yii2-mailjet/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/pgaultier/yii2-mailjet/?branch=master)
-[![License](https://poser.pugx.org/sweelix/yii2-mailjet/license)](https://packagist.org/packages/sweelix/yii2-mailjet)
-
-[![Latest Development Version](https://img.shields.io/badge/unstable-devel-yellowgreen.svg)](https://packagist.org/packages/sweelix/yii2-mailjet)
-[![Build Status](https://travis-ci.org/pgaultier/yii2-mailjet.svg?branch=devel)](https://travis-ci.org/pgaultier/yii2-mailjet)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pgaultier/yii2-mailjet/badges/quality-score.png?b=devel)](https://scrutinizer-ci.com/g/pgaultier/yii2-mailjet/?branch=devel)
-[![Code Coverage](https://scrutinizer-ci.com/g/pgaultier/yii2-mailjet/badges/coverage.png?b=devel)](https://scrutinizer-ci.com/g/pgaultier/yii2-mailjet/?branch=devel)
 
 Installation
 ------------
@@ -23,7 +22,7 @@ If you use Packagist for installing packages, then you can update your composer.
 ``` json
 {
     "require": {
-        "sweelix/yii2-mailjet": "*"
+        "blackcube/yii2-mailjet": "*"
     }
 }
 ```
@@ -38,7 +37,7 @@ return [
     //....
     'components' => [
         'mailer' => [
-            'class' => 'sweelix\mailjet\Mailer',
+            'class' => 'blackcube\mailjet\Mailer',
             'token' => '<your mailjet token>',
         ],
     ],

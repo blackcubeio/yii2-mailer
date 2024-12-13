@@ -2,17 +2,17 @@
 /**
  * Mail.php
  *
- * PHP version 5.6+
+ * PHP Version 8.2+
  *
- * @author Philippe Gaultier <pgaultier@sweelix.net>
- * @copyright 2010-2017 Philippe Gaultier
- * @license http://www.sweelix.net/license license
+ * @author Philippe Gaultier <pgaultier@gmail.com>
+ * @copyright 2010-2024
+ * @license https://www.blackcube.io/license license
  * @version XXX
- * @link http://www.sweelix.net
- * @package sweelix\mailjet
+ * @link https://www.blackcube.io
+ * @package blackcube\mailjet
  */
 
-namespace sweelix\mailjet;
+namespace blackcube\mailjet;
 
 
 use Mailjet\Client;
@@ -24,12 +24,12 @@ use Exception;
 /**
  * This component allow user to send an email
  *
- * @author Philippe Gaultier <pgaultier@sweelix.net>
- * @copyright 2010-2017 Philippe Gaultier
- * @license http://www.sweelix.net/license license
+ * @author Philippe Gaultier <pgaultier@gmail.com>
+ * @copyright 2010-2024
+ * @license https://www.blackcube.io/license license
  * @version XXX
- * @link http://www.sweelix.net
- * @package sweelix\mailjet
+ * @link https://www.blackcube.io
+ * @package blackcube\mailjet
  * @since XXX
  * @todo implement batch messages using API
  */
@@ -68,7 +68,7 @@ class Mailer extends BaseMailer
     /**
      * @inheritdoc
      */
-    public $messageClass = 'sweelix\mailjet\Message';
+    public $messageClass = 'blackcube\mailjet\Message';
     /**
      * @param Message $message
      * @since XXX

@@ -3,15 +3,14 @@ paths:
     tests: tests
     log: tests/_output
     data: tests/_data
+    output: tests/_output
     support: tests/_support
-    envs: tests/_envs
+    helpers: tests/_support/Helper
+bootstrap: _bootstrap.php
 settings:
-    bootstrap: _bootstrap.php
     colors: true
     memory_limit: 1024M
-extensions:
-    enabled:
-        - Codeception\Extension\RunFailed
+    log: true
 coverage:
     enabled: true
     include:
@@ -19,3 +18,7 @@ coverage:
     exclude:
         - vendor/*
         - tests/*
+config:
+    # the entry script URL (with host info) for functional and acceptance tests
+    # PLEASE ADJUST IT TO THE ACTUAL ENTRY SCRIPT URL
+    test_entry_url: http://localhost/index.php

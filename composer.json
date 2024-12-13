@@ -1,6 +1,6 @@
 {
-    "name": "sweelix/yii2-mailjet",
-    "description": "PHP 5.6+ MailJet integration for the Yii framework",
+    "name": "blackcube/yii2-mailjet",
+    "description": "PHP 8.3+ MailJet integration for the Yii framework",
     "keywords": ["yii2", "mailjet", "mail", "email", "mailer"],
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
@@ -10,17 +10,48 @@
             "email": "pgaultier@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "require": {
-        "yiisoft/yii2": ">=2.0.4",
+        "php" : ">=8.2.0",
         "mailjet/mailjet-apiv3-php": "~1.2",
-        "php" : ">=5.6.0"
+        "yiisoft/yii2": "~2.0.40"
     },
     "require-dev" : {
-        "php" : ">=5.6.0",
-        "codeception/codeception": "*"
+        "php" : ">=8.2.0",
+        "codeception/codeception": "~5.0",
+        "codeception/module-yii2": "~1.1",
+        "codeception/module-asserts": "~2.0"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
     },
     "autoload": {
-        "psr-4": { "sweelix\\mailjet\\": "src" }
+        "psr-4": {
+            "blackcube\\mailjet\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/",
+            "tests\\_generated\\": "tests/_support/_generated/",
+            "tests\\Helper\\": "tests/_support/Helper/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+        ]
     },
     "extra": {
         "branch-alias": {
