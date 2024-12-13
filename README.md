@@ -1,6 +1,6 @@
 Mailjet Yii2 integration
 =========================
-[![Release](https://code.redcat.io/blackcube/yii2-mailjet/badges/-/release.svg)](https://code.redcat.io/blackcube/yii2-mailjet/-/releases)
+[![Release](https://code.redcat.io/blackcube/yii2-mailjet/-/badges/release.svg)](https://code.redcat.io/blackcube/yii2-mailjet/-/releases)
 [![Pipeline](https://code.redcat.io/blackcube/yii2-mailjet/badges/devel/pipeline.svg)](https://code.redcat.io/blackcube/yii2-mailjet/-/pipelines)
 
 [![État de la Barrière Qualité](https://sonarqube.redcat.io/api/project_badges/measure?project=Mailjet&metric=alert_status&token=sqb_d6f644043dc6c1fbfd4006a57d466c22852ab8c0)](https://sonarqube.redcat.io/dashboard?id=Mailjet)
