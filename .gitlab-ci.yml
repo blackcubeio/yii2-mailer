@@ -19,6 +19,8 @@ codeception-check:
     expire_in: 1 day
     paths:
       - tests/_output
+    reports:
+      junit: tests/_output/coverage.clover
   before_script:
     # Install all project dependencies
     - composer install
@@ -27,8 +29,6 @@ codeception-check:
   script:
     - echo "Running Codeception ..."
     - vendor/bin/codecept run --coverage --coverage-xml --xml coverage.clover
-    - ls tests/_output/
-
 sonarqube-check:
   stage: sonarqube
   image:
@@ -41,7 +41,6 @@ sonarqube-check:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
     GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
   script:
-    - ls tests/_output/
     - sonar-scanner -Dsonar.host.url="${SONAR_HOST_URL}" -Dsonar.projectKey="${SONAR_PROJECT_KEY}" -Dsonar.sources=src/ -Dsonar.tests=tests/ -Dsonar.php.coverage.reportPaths=tests/_output/coverage.xml
   allow_failure: true
   rules:
