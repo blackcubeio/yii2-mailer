@@ -23,7 +23,7 @@
     "require": {
         "php" : ">=8.2.0",
         "mailjet/mailjet-apiv3-php": "~1.2",
-        "yiisoft/yii2": "~2.0.40"
+        "yiisoft/yii2": "~2.0.51"
     },
     "require-dev" : {
         "php" : ">=8.2.0",
