@@ -24,6 +24,7 @@ codeception-check:
   before_script:
     # Install all project dependencies
     - composer install
+    - export XDEBUG_MODE=coverage # Enable code coverage
   rules:
     - if: $CI_COMMIT_BRANCH == 'devel'
   script:
