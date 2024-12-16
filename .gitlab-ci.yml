@@ -6,7 +6,7 @@ stages:
 
 codeception-check:
   stage: codeception
-  image:  innosabi/php:8.2-dev
+  image: webdevops/php-dev:8.2
   cache:
     - key:
         files:
