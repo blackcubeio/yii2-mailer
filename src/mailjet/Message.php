@@ -2,202 +2,122 @@
 /**
  * Message.php
  *
- * PHP Version 8.2+
+ * PHP Version 8.3+
  *
- * @author Philippe Gaultier <pgaultier@gmail.com>
- * @copyright 2010-2024
- * @license https://www.blackcube.io/license license
- * @version XXX
+ * @copyright 2010-2025 Philippe Gaultier
+ * @license https://www.blackcube.io/license
  * @link https://www.blackcube.io
- * @package blackcube\mailjet
  */
 
-namespace blackcube\mailjet;
+namespace blackcube\mailer\mailjet;
 
-
-use yii\base\InvalidConfigException;
-use yii\base\InvalidParamException;
 use yii\base\NotSupportedException;
-use yii\helpers\ArrayHelper;
 use yii\mail\BaseMessage;
-use Yii;
-use yii\mail\MailerInterface;
 
 /**
  * This component allow user to send an email
  *
- * @author Philippe Gaultier <pgaultier@gmail.com>
- * @copyright 2010-2024
- * @license https://www.blackcube.io/license license
- * @version XXX
+ * @copyright 2010-2025 Philippe Gaultier
+ * @license https://www.blackcube.io/license
  * @link https://www.blackcube.io
- * @package blackcube\mailjet
- * @since XXX
  */
-class Message extends BaseMessage
+class
+Message extends BaseMessage
 {
-    /**
-     * @var string|array from
-     */
-    protected $from;
+    protected string|array|null $from = null;
+
+    protected string|array|null $sender = null;
+
+    protected array $to = [];
+
+    protected string|array|null $replyTo = null;
+
+    protected array $cc = [];
+
+    protected array $bcc = [];
+
+    protected ?string $subject = null;
+
+    protected ?string $textBody = null;
+
+    protected ?string $htmlBody = null;
+
+    protected array $attachments = [];
+
+    protected ?string $tag = null;
+
+    protected string $trackOpens = 'account_default';
+
+    protected string $trackClicks = 'account_default';
+
+    protected array $headers = [];
+
+    protected ?int $templateId = null;
+
+    protected ?bool $templateLanguage = null;
+
+    protected array $templateModel = [];
+
+    protected bool $inlineCss = true;
+
+    protected string $charset = 'utf-8';
 
     /**
-     * @var string|array from
+     * {@inheritdoc}
      */
-    protected $sender;
-
-    /**
-     * @var array
-     */
-    protected $to = [];
-
-    /**
-     * @var string|array reply to
-     */
-    protected $replyTo;
-
-    /**
-     * @var array
-     */
-    protected $cc = [];
-
-    /**
-     * @var array
-     */
-    protected $bcc = [];
-
-    /**
-     * @var string
-     */
-    protected $subject;
-
-    /**
-     * @var string
-     */
-    protected $textBody;
-
-    /**
-     * @var string
-     */
-    protected $htmlBody;
-
-    /**
-     * @var array
-     */
-    protected $attachments = [];
-
-    /**
-     * @var array
-     */
-    protected $inlinedAttachments = [];
-
-    /**
-     * @var string
-     */
-    protected $tag;
-
-    /**
-     * @var string
-     */
-    protected $trackOpens = 'account_default';
-
-    /**
-     * @var string
-     */
-    protected $trackClicks = 'account_default';
-
-    /**
-     * @var array
-     */
-    protected $headers = [];
-
-    /**
-     * @var integer
-     */
-    protected $templateId;
-
-    /**
-     * @var bool
-     */
-    protected $templateLanguage;
-
-    /**
-     * @var array model associated with the template
-     */
-    protected $templateModel = [];
-
-    /**
-     * @var bool
-     */
-    protected $inlineCss = true;
-
-    protected $charset = 'utf-8';
-
-    /**
-     * @inheritdoc
-     */
-    public function getCharset()
+    public function getCharset(): string
     {
         return $this->charset;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setCharset($charset)
+    public function setCharset($charset): never
     {
         throw new NotSupportedException();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getFrom()
+    public function getFrom(): ?string
     {
         return self::stringifyEmails($this->from);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setFrom($from)
+    public function setFrom($from): static
     {
         $this->from = $from;
         return $this;
     }
 
-    /**
-     * @return array|string
-     * @since XXX
-     */
-    public function getSender()
+    public function getSender(): string|array|null
     {
         return $this->sender;
     }
 
-    /**
-     * @param string|array $sender
-     * @return $this
-     * @since XXX
-     */
-    public function setSender($sender)
+    public function setSender(string|array $sender): static
     {
         $this->sender = $sender;
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getTo()
+    public function getTo(): array
     {
         return $this->to;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setTo($to)
+    public function setTo($to): static
     {
         if (is_string($to) === true) {
             $to = [$to];
@@ -207,34 +127,34 @@ class Message extends BaseMessage
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getReplyTo()
+    public function getReplyTo(): ?string
     {
         return self::stringifyEmails($this->replyTo);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setReplyTo($replyTo)
+    public function setReplyTo($replyTo): static
     {
         $this->replyTo = $replyTo;
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getCc()
+    public function getCc(): array
     {
         return $this->cc;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setCc($cc)
+    public function setCc($cc): static
     {
         if (is_string($cc) === true) {
             $cc = [$cc];
@@ -244,17 +164,17 @@ class Message extends BaseMessage
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getBcc()
+    public function getBcc(): array
     {
         return $this->bcc;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setBcc($bcc)
+    public function setBcc($bcc): static
     {
         if (is_string($bcc) === true) {
             $bcc = [$bcc];
@@ -264,163 +184,106 @@ class Message extends BaseMessage
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function getSubject()
+    public function getSubject(): ?string
     {
         return $this->subject;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setSubject($subject)
+    public function setSubject($subject): static
     {
         $this->subject = $subject;
         return $this;
     }
 
-    /**
-     * @return string|null text body of the message
-     * @since XXX
-     */
-    public function getTextBody()
+    public function getTextBody(): ?string
     {
         return $this->textBody;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setTextBody($text)
+    public function setTextBody($text): static
     {
         $this->textBody = $text;
         return $this;
     }
 
-    /**
-     * @return string|null html body of the message
-     * @since XXX
-     */
-    public function getHtmlBody()
+    public function getHtmlBody(): ?string
     {
         return $this->htmlBody;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setHtmlBody($html)
+    public function setHtmlBody($html): static
     {
         $this->htmlBody = $html;
         return $this;
     }
 
-    /**
-     * @return string tag associated to the email
-     * @since XXX
-     */
-    public function getTag()
+    public function getTag(): ?string
     {
         return $this->tag;
     }
 
-    /**
-     * @param string $tag tag which should be associated to the email
-     * @return $this
-     * @since XXX
-     */
-    public function setTag($tag)
+    public function setTag(string $tag): static
     {
         $this->tag = $tag;
         return $this;
     }
 
-    /**
-     * @param string $trackOpens can be account_default, disabled, enabled
-     * @return $this
-     * @since XXX
-     */
-    public function setTrackOpens($trackOpens)
+    public function setTrackOpens(string $trackOpens): static
     {
         $this->trackOpens = $trackOpens;
         return $this;
     }
 
-    /**
-     * @return string tracking status
-     * @since XXX
-     */
-    public function getTrackOpens()
+    public function getTrackOpens(): string
     {
         return $this->trackOpens;
     }
 
-    /**
-     * @param string $trackClicks can be account_default, disabled, enabled
-     * @return $this
-     * @since XXX
-     */
-    public function setTrackClicks($trackClicks)
+    public function setTrackClicks(string $trackClicks): static
     {
         $this->trackClicks = $trackClicks;
         return $this;
     }
 
-    /**
-     * @return string tracking status
-     * @since XXX
-     */
-    public function getTrackClicks()
+    public function getTrackClicks(): string
     {
         return $this->trackClicks;
     }
 
-    /**
-     * @param integer $templateId template Id used. in this case, Subject / HtmlBody / TextBody are discarded
-     * @return $this
-     * @since XXX
-     */
-    public function setTemplateId($templateId)
+    public function setTemplateId(int $templateId): static
     {
         $this->templateId = $templateId;
         return $this;
     }
 
-    /**
-     * @return integer|null current templateId
-     * @since XXX
-     */
-    public function getTemplateId()
+    public function getTemplateId(): ?int
     {
         return $this->templateId;
     }
 
-    /**
-     * @param integer $templateId template Id used. in this case, Subject / HtmlBody / TextBody are discarded
-     * @return $this
-     * @since XXX
-     */
-    public function setTemplateLanguage($processLanguage)
+    public function setTemplateLanguage(bool $processLanguage): static
     {
         $this->templateLanguage = $processLanguage;
         return $this;
     }
 
-    /**
-     * @return integer|null current templateId
-     * @since XXX
-     */
-    public function getTemplateLanguage()
+    public function getTemplateLanguage(): ?bool
     {
         return $this->templateLanguage;
     }
-    /**
-     * @param array $templateModel model associated with the template
-     * @return $this
-     * @since XXX
-     */
-    public function setTemplateModel($templateModel)
+
+    public function setTemplateModel(array $templateModel): static
     {
         $this->templateModel = $templateModel;
         if (empty($this->templateModel) === false) {
@@ -429,59 +292,34 @@ class Message extends BaseMessage
         return $this;
     }
 
-    /**
-     * @return array current template model
-     * @since XXX
-     */
-    public function getTemplateModel()
+    public function getTemplateModel(): array
     {
         return $this->templateModel;
     }
 
-    /**
-     * @param bool $inlineCss define if css should be inlined
-     * @return $this
-     * @since XXX
-     */
-    public function setInlineCss($inlineCss)
+    public function setInlineCss(bool $inlineCss): static
     {
         $this->inlineCss = $inlineCss;
         return $this;
     }
 
-    /**
-     * @return bool define if css should be inlined
-     * @since XXX
-     */
-    public function getInlineCss()
+    public function getInlineCss(): bool
     {
         return $this->inlineCss;
     }
 
-    /**
-     * @param string $headerName
-     * @param string $headerValue
-     * @since XXX
-     */
-    public function addHeader($headerName, $headerValue)
+    public function addHeader(string $headerName, string $headerValue): static
     {
         $this->headers[$headerName] = $headerValue;
+        return $this;
     }
 
-    /**
-     * @return array|null headers which should be added to the mail
-     * @since XXX
-     */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return empty($this->headers) ? [] : $this->headers;
     }
 
-    /**
-     * @return array|null list of attachments
-     * @since XXX
-     */
-    public function getAttachments()
+    public function getAttachments(): ?array
     {
         if (empty($this->attachments) === true) {
             return null;
@@ -502,34 +340,9 @@ class Message extends BaseMessage
     }
 
     /**
-     * @return array|null list of inlinedAttachments
-     * @since XXX
+     * {@inheritdoc}
      */
-    public function getInlinedAttachments()
-    {
-        if (empty($this->inlinedAttachments) === true) {
-            return null;
-        } else {
-            $inlinedAttachments = array_map(function($inlinedAttachment) {
-                $item = [
-                    'ContentType' => $inlinedAttachment['ContentType'],
-                    'Filename' => $inlinedAttachment['Name'],
-                    'Base64Content' => $inlinedAttachment['Content'],
-                ];
-                if (isset($inlinedAttachment['ContentID']) === true) {
-                    $item['ContentID'] = $inlinedAttachment['ContentID'];
-                }
-                return $item;
-            }, $this->inlinedAttachments);
-            return $inlinedAttachments;
-        }
-    }
-
-
-    /**
-     * @inheritdoc
-     */
-    public function attach($fileName, array $options = [])
+    public function attach($fileName, array $options = []): static
     {
         $attachment = [
             'Content' => base64_encode(file_get_contents($fileName))
@@ -549,9 +362,9 @@ class Message extends BaseMessage
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function attachContent($content, array $options = [])
+    public function attachContent($content, array $options = []): static
     {
         $attachment = [
             'Content' => base64_encode($content)
@@ -559,7 +372,7 @@ class Message extends BaseMessage
         if (!empty($options['fileName'])) {
             $attachment['Name'] = $options['fileName'];
         } else {
-            throw new InvalidParamException('Filename is missing');
+            throw new \InvalidArgumentException('Filename is missing');
         }
         if (!empty($options['contentType'])) {
             $attachment['ContentType'] = $options['contentType'];
@@ -571,9 +384,9 @@ class Message extends BaseMessage
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function embed($fileName, array $options = [])
+    public function embed($fileName, array $options = []): string
     {
         $embed = [
             'Content' => base64_encode(file_get_contents($fileName))
@@ -588,15 +401,15 @@ class Message extends BaseMessage
         } else {
             $embed['ContentType'] = 'application/octet-stream';
         }
-        $embed['ContentID'] = uniqid();
-        $this->inlinedAttachments[] = $embed;
+        $embed['ContentID'] = 'cid:' . uniqid();
+        $this->attachments[] = $embed;
         return $embed['ContentID'];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function embedContent($content, array $options = [])
+    public function embedContent($content, array $options = []): string
     {
         $embed = [
             'Content' => base64_encode($content)
@@ -604,35 +417,29 @@ class Message extends BaseMessage
         if (!empty($options['fileName'])) {
             $embed['Name'] = $options['fileName'];
         } else {
-            throw new InvalidParamException('Filename is missing');
+            throw new \InvalidArgumentException('Filename is missing');
         }
         if (!empty($options['contentType'])) {
             $embed['ContentType'] = $options['contentType'];
         } else {
             $embed['ContentType'] = 'application/octet-stream';
         }
-        $embed['ContentID'] = uniqid();
-        $this->inlinedAttachments[] = $embed;
+        $embed['ContentID'] = 'cid:' . uniqid();
+        $this->attachments[] = $embed;
         return $embed['ContentID'];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @todo make real serialization to make message compliant with MailjetAPI
      */
-    public function toString()
+    public function toString(): string
     {
         return serialize($this);
     }
 
 
-    /**
-     * @param array|string $emailsData email can be defined as string. In this case no transformation is done
-     *                                 or as an array ['email@test.com', 'email2@test.com' => 'Email 2']
-     * @return string|null
-     * @since XXX
-     */
-    public static function stringifyEmails($emailsData)
+    public static function stringifyEmails(string|array|null $emailsData): ?string
     {
         $emails = null;
         if (empty($emailsData) === false) {
@@ -654,7 +461,8 @@ class Message extends BaseMessage
         }
         return $emails;
     }
-    public static function convertEmails($emailsData)
+
+    public static function convertEmails(string|array|null $emailsData): array
     {
         $emails = [];
         if (empty($emailsData) === false) {
@@ -689,6 +497,5 @@ class Message extends BaseMessage
             }
         }
         return $emails;
-
     }
 }

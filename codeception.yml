@@ -1,4 +1,6 @@
+namespace: tests
 actor: Tester
+bootstrap: _bootstrap.php
 paths:
     tests: tests
     log: tests/_output
@@ -6,19 +8,15 @@ paths:
     output: tests/_output
     support: tests/_support
     helpers: tests/_support/Helper
-bootstrap: _bootstrap.php
 settings:
-    colors: true
-    memory_limit: 1024M
-    log: true
+  memory_limit: 1024M
+  log: true
+  colors: false
 coverage:
-    enabled: true
-    include:
-        - src/*
-    exclude:
-        - vendor/*
-        - tests/*
+  enabled: true
+  include:
+    - src/*
 config:
-    # the entry script URL (with host info) for functional and acceptance tests
-    # PLEASE ADJUST IT TO THE ACTUAL ENTRY SCRIPT URL
-    test_entry_url: http://localhost/index.php
+  # the entry script URL (with host info) for functional and acceptance tests
+  # PLEASE ADJUST IT TO THE ACTUAL ENTRY SCRIPT URL
+  test_entry_url: http://localhost/index.php

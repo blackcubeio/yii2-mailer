@@ -1,6 +1,6 @@
-Blackcube Mailjet is free software. It is released under the terms of the following BSD License.
+Blackcube Mailer is free software. It is released under the terms of the following BSD License.
 
-Copyright 2010-2016 by Blackcube
+Copyright 2010-2025 by Blackcube
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

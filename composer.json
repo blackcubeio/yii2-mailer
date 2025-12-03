@@ -1,45 +1,36 @@
 {
-    "name": "blackcube/yii2-mailjet",
-    "description": "PHP 8.3+ MailJet integration for the Yii framework",
+    "name": "blackcube/yii2-mailer",
+    "description": "PHP 8.3+ Mailer integration for the Yii framework",
     "keywords": ["yii2", "mailjet", "mail", "email", "mailer"],
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Philippe Gaultier",
-            "email": "pgaultier@gmail.com"
+            "email": "philippe@blackcube.io"
         }
     ],
     "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packagist.org"
-        },
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
     ],
     "require": {
-        "php" : ">=8.2.0",
-        "mailjet/mailjet-apiv3-php": "~1.2",
-        "yiisoft/yii2": "~2.0.51"
+        "php" : "~8.3",
+        "mailjet/mailjet-apiv3-php": "~1.6",
+        "sendgrid/sendgrid": "~8.1",
+        "wildbit/postmark-php": "~7.0",
+        "yiisoft/yii2": "~2.0"
     },
     "require-dev" : {
-        "php" : ">=8.2.0",
-        "codeception/codeception": "~5.0",
-        "codeception/module-yii2": "~1.1",
-        "codeception/module-asserts": "~2.0"
-    },
-    "config": {
-        "process-timeout": 1800,
-        "allow-plugins": {
-            "yiisoft/yii2-composer": true
-        }
+        "php" : "~8.3",
+        "codeception/codeception": "^5.3",
+        "codeception/module-asserts": "^3.2"
     },
     "autoload": {
         "psr-4": {
-            "blackcube\\mailjet\\": "src"
+            "blackcube\\mailer\\": "src"
         }
     },
     "autoload-dev": {
@@ -49,13 +40,14 @@
             "tests\\Helper\\": "tests/_support/Helper/"
         }
     },
-    "scripts": {
-        "post-install-cmd": [
-        ]
-    },
     "extra": {
         "branch-alias": {
-            "dev-devel": "1.0.x-dev"
+            "dev-devel": "2.x-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     }
 }

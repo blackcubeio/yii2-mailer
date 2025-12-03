@@ -1,18 +1,15 @@
 <?php
 /**
- * Mail.php
+ * Mailer.php
  *
- * PHP Version 8.2+
+ *  PHP Version 8.3+
  *
- * @author Philippe Gaultier <pgaultier@gmail.com>
- * @copyright 2010-2024
- * @license https://www.blackcube.io/license license
- * @version XXX
+ * @copyright 2010-2025 Philippe Gaultier
+ * @license https://www.blackcube.io/license
  * @link https://www.blackcube.io
- * @package blackcube\mailjet
  */
 
-namespace blackcube\mailjet;
+namespace blackcube\mailer\mailjet;
 
 
 use Mailjet\Client;
@@ -24,57 +21,34 @@ use Exception;
 /**
  * This component allow user to send an email
  *
- * @author Philippe Gaultier <pgaultier@gmail.com>
- * @copyright 2010-2024
- * @license https://www.blackcube.io/license license
- * @version XXX
+ * @copyright 2010-2025 Philippe Gaultier
+ * @license https://www.blackcube.io/license
  * @link https://www.blackcube.io
- * @package blackcube\mailjet
- * @since XXX
  * @todo implement batch messages using API
  */
 class Mailer extends BaseMailer
 {
-    /**
-     * @var string
-     */
-    public $apiKey;
+    public ?string $apiKey = null;
 
-    /**
-     * @var string
-     */
-    public $apiSecret;
+    public ?string $apiSecret = null;
 
-    /**
-     * @var boolean
-     */
-    public $enable = true;
+    public bool $enable = true;
 
-    /**
-     * @var string
-     */
-    public $apiVersion = 'v3.1';
+    public string $apiVersion = 'v3.1';
 
-    /**
-     * @var string
-     */
-    public $apiUrl;
+    public ?string $apiUrl = null;
 
-    /**
-     * @var bool
-     */
-    public $secured = true;
+    public bool $secured = true;
 
     /**
      * @inheritdoc
      */
-    public $messageClass = 'blackcube\mailjet\Message';
+    public $messageClass = Message::class;
     /**
-     * @param Message $message
-     * @since XXX
+     * {@inheritdoc}
      * @throws InvalidConfigException
      */
-    public function sendMessage($message)
+    protected function sendMessage($message): bool
     {
         try {
             if ($this->apiKey === null) {
@@ -124,7 +98,7 @@ class Mailer extends BaseMailer
             }
 
             $bcc = $message->getBcc();
-            if (empty($cc) === false) {
+            if (empty($bcc) === false) {
                 $bcc = Message::convertEmails($bcc);
                 $mailJetMessage['Bcc'] = $bcc;
             }
@@ -132,12 +106,6 @@ class Mailer extends BaseMailer
             $attachments = $message->getAttachments();
             if ($attachments !== null) {
                 $mailJetMessage['Attachments'] = $attachments;
-            }
-
-            //Get inilined attachments
-            $inlinedAttachments = $message->getInlinedAttachments();
-            if ($inlinedAttachments !== null) {
-                $mailJetMessage['InlinedAttachments'] = $inlinedAttachments;
             }
 
             $headers = $message->getHeaders();
