@@ -1,6 +1,8 @@
 Yii2 Mailer Change Log
 ======================
 
+2.0.0 December 3, 2025
+------------------------
 
  * New: Multi-provider support (Mailjet, Postmark, SendGrid)
  * New: Namespace changed to `blackcube\mailer\{provider}\`
