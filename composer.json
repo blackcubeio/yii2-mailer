@@ -1,30 +1,53 @@
 {
-    "name": "sweelix/yii2-mailjet",
-    "description": "PHP 5.6+ MailJet integration for the Yii framework",
+    "name": "blackcube/yii2-mailer",
+    "description": "PHP 8.3+ Mailer integration for the Yii framework",
     "keywords": ["yii2", "mailjet", "mail", "email", "mailer"],
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Philippe Gaultier",
-            "email": "pgaultier@gmail.com"
+            "email": "philippe@blackcube.io"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ],
     "require": {
-        "yiisoft/yii2": ">=2.0.4",
-        "mailjet/mailjet-apiv3-php": "~1.2",
-        "php" : ">=5.6.0"
+        "php" : "~8.3",
+        "mailjet/mailjet-apiv3-php": "~1.6",
+        "sendgrid/sendgrid": "~8.1",
+        "wildbit/postmark-php": "~7.0",
+        "yiisoft/yii2": "~2.0"
     },
     "require-dev" : {
-        "php" : ">=5.6.0",
-        "codeception/codeception": "*"
+        "php" : "~8.3",
+        "codeception/codeception": "^5.3",
+        "codeception/module-asserts": "^3.2"
     },
     "autoload": {
-        "psr-4": { "sweelix\\mailjet\\": "src" }
+        "psr-4": {
+            "blackcube\\mailer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/",
+            "tests\\_generated\\": "tests/_support/_generated/",
+            "tests\\Helper\\": "tests/_support/Helper/"
+        }
     },
     "extra": {
         "branch-alias": {
-            "dev-devel": "1.0.x-dev"
+            "dev-devel": "2.x-dev"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     }
 }

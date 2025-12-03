@@ -2,8 +2,8 @@
 #
 # Suite for unit (internal) tests.
 
-class_name: UnitTester
+class_name: SendgridTester
 modules:
     enabled:
         - Asserts
-        - \Helper\Unit
+        - \tests\Helper\Sendgrid

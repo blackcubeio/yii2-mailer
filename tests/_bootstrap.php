@@ -16,9 +16,21 @@ define('MAILJET_KEY', '<key>');
 define('MAILJET_SECRET', '<secret>');
 define('MAILJET_TO', '<target>');
 define('MAILJET_TEMPLATE', 218932);
-
 define('MAILJET_TEST_SEND', false);
 
+define('POSTMARK_FROM', '<sender>');
+define('POSTMARK_TOKEN', '<token>');
+define('POSTMARK_TO', '<target>');
+define('POSTMARK_TEMPLATE', 218932);
+define('POSTMARK_TEST_SEND', false);
 
-Yii::setAlias('@tests/unit', __DIR__ . '/unit');
-Yii::setAlias('@sweelix/mailjet', dirname(__DIR__) .'/src');
+define('SENDGRID_FROM', '<sender>');
+define('SENDGRID_KEY', '<key>');
+define('SENDGRID_TO', '<target>');
+define('SENDGRID_TEMPLATE', 'd-xxxxxx');
+define('SENDGRID_TEST_SEND', false);
+
+Yii::setAlias('@tests/mailjet', __DIR__ . '/mailjet');
+Yii::setAlias('@tests/postmark', __DIR__ . '/postmark');
+Yii::setAlias('@tests/sendgrid', __DIR__ . '/sendgrid');
+Yii::setAlias('@blackcube/mailer', dirname(__DIR__) . '/src');

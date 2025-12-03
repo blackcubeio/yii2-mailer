@@ -1,28 +1,29 @@
 <?php
 
-namespace tests\unit;
+namespace tests\mailjet;
 
-use sweelix\mailjet\Mailer;
+use blackcube\mailer\mailjet\Mailer;
 use yii\helpers\ArrayHelper;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * Clean up after test.
      * By default the application created with [[mockApplication]] will be destroyed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
-        // parent::tearDown();
+        parent::tearDown();
         $this->destroyApplication();
     }
+
     /**
      * Populates Yii::$app with a new application
      * The application will be destroyed on tearDown() automatically.
      * @param array $config The application configuration, if needed
      * @param string $appClass name of the application class to create
      */
-    protected function mockApplication($config = [], $appClass = '\yii\console\Application')
+    protected function mockApplication(array $config = [], string $appClass = '\yii\console\Application'): void
     {
         new $appClass(ArrayHelper::merge([
             'id' => 'testapp',
@@ -30,14 +31,14 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             'vendorPath' => $this->getVendorPath(),
             'components' => [
                 'mailer' => [
-                    'class' => Mailer::className(),
+                    'class' => Mailer::class,
                     'apiKey' => MAILJET_KEY,
                     'apiSecret' => MAILJET_SECRET
                 ]
             ]
         ], $config));
     }
-    protected function getVendorPath()
+    protected function getVendorPath(): string
     {
         $vendor = dirname(dirname(__DIR__)) . '/vendor';
         if (!is_dir($vendor)) {
@@ -45,10 +46,11 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         }
         return $vendor;
     }
+
     /**
      * Destroys application in Yii::$app by setting it to null.
      */
-    protected function destroyApplication()
+    protected function destroyApplication(): void
     {
         \Yii::$app = null;
     }
